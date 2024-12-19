@@ -1,0 +1,46 @@
+<div data-controller="home" data-code="<%= params[:code]%>">
+  <%= polaris_page(title: "Import Duty and Tax Settings") do %>
+    <%= polaris_layout do |layout| %>
+      <% layout.with_section do %>
+        <%= render partial: "logo" %>
+        <%= polaris_card(title: "Country Code: #{params[:code]}") do %>
+          <%= polaris_form_layout do |form_layout| %>
+            <form>
+              <% form_layout.with_group(condensed: true) do |group| %>
+                <% group.with_item do %>
+                  <%= polaris_text_field(
+                    name: "threshold", 
+                    label: "Threshold", 
+                    value: params["threshold"], 
+                    type: :number, 
+                    min: 0, 
+                    step: 1.0,  
+                    "data-home-target": "input"
+                  ) %>
+                <% end %>
+                <% group.with_item do %>
+                  <%= polaris_text_field(
+                    name: "percentage", 
+                    label: "Percentage", 
+                    value: params["percentage"], 
+                    prefix: "%", 
+                    type: :number, 
+                    min: 0, 
+                    step: 1,
+                    "data-home-target": "input"
+                  ) %>
+                <% end %>
+              <% end %>
+            </form>
+          <% end %>
+          <%= polaris_spacer(vertical: :extra_loose) %>
+          <%= polaris_horizontal_stack(block_align: :end) do %>
+            <%= polaris_button(url: "/") { "Cancel" } %>&nbsp;
+            <%= polaris_button(primary: true, "data-action": "click->home#save") { "Save Settings" } %>
+          <% end %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>
+

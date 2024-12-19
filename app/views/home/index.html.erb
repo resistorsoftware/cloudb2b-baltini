@@ -1,0 +1,23 @@
+<div data-controller="home">
+  <ui-modal id="confirmation-modal" data-controller="modal" variant="small">
+    <div class="modal-wrapper">
+      <p>This action can't be undone. Are you sure?</p>
+    </div>
+    <ui-title-bar title="Confirm action?">
+      <button data-action="modal#confirm" variant="primary" tone="critical">Confirm</button>
+      <button data-action="modal#close">Cancel</button>
+    </ui-title-bar>
+  </ui-modal>
+
+  <%= polaris_page(title: "Import Duty and Tax Settings") do |page| %>
+    <% page.with_custom_primary_action do %>
+      <%= polaris_button(url: "home/new") { "Add Country" } %>
+    <% end %>
+    <%= polaris_layout do |layout| %>
+      <% layout.with_section do %>
+        <%= render partial: "logo" %>
+        <%= render partial: "rates" %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

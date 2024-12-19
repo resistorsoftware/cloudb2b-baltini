@@ -1,0 +1,53 @@
+<div id="rates">
+  <%= polaris_card do |card| %>
+    <% if !current_shop.rates.empty? %>
+      <%= polaris_resource_list(
+        resource_name: {
+          singular: "setting",
+          plural: "settings"
+        },
+        show_header: true,
+        items: current_shop.rates,
+        total_items_count: current_shop.rates.keys.size
+      ) do %>
+        <% current_shop.rates.try(:each) do |rate| %>
+          <%= polaris_resource_item(persist_actions: true) do |resource_item| %>
+            <% resource_item.with_shortcut_actions do |shortcut_action| %>
+              <% shortcut_action.with_button(
+                url: "#",
+                destructive: true,
+                data: {
+                  controller: "confirmation",
+                  confirmation_target_param: "#confirmation-modal",
+                  confirmation_code_param: rate.first,
+                  action: "confirmation#show",
+                },
+                #"data-home-country-code-param": rate.first,
+                #"data-action": "click->home#removeRate",
+                content: "Delete"
+              ) %>
+              <% shortcut_action.with_button(
+                url: "/edit?code=#{rate.first}&threshold=#{rate.last["threshold"]}&percentage=#{rate.last["percentage"]}",
+                content: "Edit"
+              ) %>
+            <% end %>
+            <%= polaris_stack(alignment: :center, distribution: :fill, wrap: false) do |stack| %>
+              <% stack.with_item do %>
+                <%= rate.first %>
+              <% end %>
+              <% stack.with_item do %>
+                Threshold: <%= rate.last["threshold"] %>
+              <% end %>
+              <% stack.with_item do %>
+                Percentage: <%= rate.last["percentage"] %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %> 
+      <% end %>
+    <% else %>
+      <p>No rates are currently set up in the App</p>
+    <% end %>
+  <% end %>
+</div>
+

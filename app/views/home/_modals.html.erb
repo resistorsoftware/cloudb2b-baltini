@@ -1,0 +1,44 @@
+<%= polaris_card(title: "Modals") do %>
+  <%= polaris_stack do |stack| %>
+    <% stack.with_item do %>
+      <ui-modal id="simple-modal" data-controller="modal">
+        <div class="modal-wrapper">
+          <p>Modal content</p>
+        </div>
+        <ui-title-bar title="Simple modal">
+          <button variant="primary">Primary action</button>
+          <button data-action="modal#close">Close</button>
+        </ui-title-bar>
+      </ui-modal>
+
+      <%= polaris_button(
+        data: {
+          controller: "modal-opener",
+          action: "modal-opener#open",
+          modal_opener_target_param: "#simple-modal"
+        }
+      ) { "Simple modal" } %>
+    <% end %>
+
+    <% stack.with_item do %>
+      <ui-modal id="confirmation-modal" data-controller="modal" variant="small">
+        <div class="modal-wrapper">
+          <p>This action can't be undone. Are you sure?</p>
+        </div>
+        <ui-title-bar title="Confirm action?">
+          <button data-action="modal#confirm" variant="primary" tone="critical">Confirm</button>
+          <button data-action="modal#close">Cancel</button>
+        </ui-title-bar>
+      </ui-modal>
+
+      <%= polaris_button(
+        url: products_url,
+        data: {
+          controller: "confirmation",
+          confirmation_target_param: "#confirmation-modal",
+          action: "confirmation#show",
+        }
+      ) { "Confirmation modal" } %>
+    <% end %>
+  <% end %>
+<% end %>
