@@ -1,7 +1,7 @@
 ShopifyApp.configure do |config|
   config.application_name = "Cloud B2B Shopify Import Duty and Taxes"
   config.old_secret = ""
-  config.scope = "" # See shopify.app.toml for scopes
+  config.scope = "read_products, write_shipping" # See shopify.app.toml for scopes
   # Consult this page for more scope options: https://shopify.dev/api/usage/access-scopes
   config.embedded_app = true
   config.after_authenticate_job = {job: "AfterAuthenticateJob", inline: true}
