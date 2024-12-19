@@ -23,7 +23,10 @@ gem "sprockets-rails"
 gem "jsbundling-rails"
 gem "turbo-rails"
 gem "stimulus-rails"
-
+gem "money"
+gem "net-pop"
+gem "iso_country_codes"
+gem "money-open-exchange-rates", "~> 1.4"
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem "http_logger"

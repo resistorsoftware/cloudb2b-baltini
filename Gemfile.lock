@@ -148,6 +148,7 @@ GEM
     irb (1.14.1)
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
+    iso_country_codes (0.7.8)
     jsbundling-rails (1.3.1)
       railties (>= 6.0.0)
     jwt (2.9.3)
@@ -171,6 +172,10 @@ GEM
     minitest (5.25.4)
     mocha (2.7.0)
       ruby2_keywords (>= 0.0.5)
+    money (6.19.0)
+      i18n (>= 0.6.4, <= 2)
+    money-open-exchange-rates (1.4.2)
+      money (~> 6.12)
     msgpack (1.7.5)
     multi_json (1.15.0)
     multi_xml (0.7.1)
@@ -362,8 +367,12 @@ DEPENDENCIES
   foreman
   hotwire-livereload
   http_logger
+  iso_country_codes
   jsbundling-rails
   mocha
+  money
+  money-open-exchange-rates (~> 1.4)
+  net-pop
   pg (~> 1.1)
   polaris_view_components (~> 2.0)
   pry-rails
